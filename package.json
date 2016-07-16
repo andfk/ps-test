@@ -1,0 +1,27 @@
+{
+  "name": "ps-test",
+  "version": "0.0.0",
+  "description": "Angular test",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "karma start",
+    "start": "node index.js",
+    "bower": "node_modules/.bin/bower install",
+    "postinstall": "npm run bower",
+    "test-e2e": "webdriver-manager start && npm run start && protractor e2e.config.js"
+  },
+  "keywords": [
+    "angular",
+    "test"
+  ],
+  "author": "Andres Franco <hello@andresfran.co>",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2"
+  }
+}

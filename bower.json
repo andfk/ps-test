@@ -1,0 +1,29 @@
+{
+  "name": "ps-test",
+  "description": "Angular test",
+  "main": "index.js",
+  "authors": [
+    "Andres Franco <hello@andresfran.co>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "angular",
+    "test"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "blueimp-file-upload": "git@github.com:blueimp/jQuery-File-Upload.git#^9.12.5",
+    "angular-mocks": "^1.5.7",
+    "angular": "^1.5.7",
+    "jquery-ui": "jquery.ui#^1.12.0",
+    "jquery": "^3.1.0"
+  }
+}
