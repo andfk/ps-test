@@ -1,0 +1,27 @@
+.wistia-uploader button.wistia-upload-btn {
+  overflow:hidden;
+  position:relative;
+}
+
+.wistia-uploader .wistia-upload-progress-bar {
+  margin:5px 0;
+  height:5px;
+  background:#5a5aa0;
+  border-radius:10px;
+}
+
+.wistia-uploader input[type='file'] {
+  opacity:0;
+  position:absolute;
+  z-index:2;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  cursor: pointer;
+}
+
+.wistia-uploader .wistia-player-wrapper  {
+  margin-top:20px;
+}
