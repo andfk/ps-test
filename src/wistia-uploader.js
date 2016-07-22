@@ -75,7 +75,7 @@
 
     return {
       restrict: 'E',
-      scope: true,
+      scope:true,
       template: template,
       link: function(scope, el, attrs){
 
@@ -105,34 +105,55 @@
             api_password: opts.apiPassword
           },
           acceptFileTypes: /^video\/.*$/,
-          submit: function(){
-            if(!opts.apiPassword) return false;
-          },
-          start: function(){
-            scope.isUploading = true;
-            scope.$digest();
-          },
-          done: function (e, data) {
-            scope.progressbarWidth = '%';
-            scope.isUploading = false;
-            scope.btnValue = opts.btnValue; // reset button value
-            var playerHtml = wistiaService.getVideoPlayer(data.result.hashed_id);
-            el[0].getElementsByClassName('wistia-player-wrapper')[0].innerHTML = playerHtml;
-            scope.hasVideo = true;
-            scope.$digest();
-          },
-          fail: function(e, data){
-            //TODO much better error handling scenario
-            $log.error('Upload failed!');
-          },
-          progress: function(e, data){
-            var percentage = parseInt(data.loaded / data.total * 100, 10),
-                percentageLabel = percentage + '%';
-            scope.progressbarWidth = percentageLabel;
-            scope.btnValue = percentageLabel;
-            scope.$digest();
-          }
+          submit: submit,
+          start: start,
+          done: done,
+          fail: fail,
+          progress: progress
         });
+
+        // cleanup
+        scope.on('$destroy', destroy);
+
+        function destroy(){
+          btnUpload.fileupload('destroy');
+        }
+
+        function submit(){
+          if(!opts.apiPassword) return false;
+        }
+
+        function start(){
+          scope.isUploading = true;
+          scope.$digest();
+        }
+
+        // calls on done uploading
+        function done(e, data){
+          scope.progressbarWidth = '%';
+          scope.isUploading = false;
+          scope.btnValue = opts.btnValue; // reset button value
+          var playerHtml = wistiaService.getVideoPlayer(data.result.hashed_id);
+          el[0].getElementsByClassName('wistia-player-wrapper')[0].innerHTML = playerHtml;
+          scope.hasVideo = true;
+          scope.$digest();
+        }
+
+        function fail(e, data){
+          //TODO much better error handling scenario
+          $log.error('Upload failed!');
+        }
+
+        // progress upload
+        function progress(e, data){
+          var percentage = parseInt(data.loaded / data.total * 100, 10),
+              percentageLabel = percentage + '%';
+          scope.progressbarWidth = percentageLabel;
+          scope.btnValue = percentageLabel;
+          scope.$digest();
+        }
+
+
 
       }
     };
